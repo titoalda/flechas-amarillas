@@ -35,7 +35,8 @@ RESERVAS_TO = os.environ.get("RESERVAS_TO", "")
 RESERVAS_FROM = os.environ.get("RESERVAS_FROM", "")
 
 EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$")
-LIMITE = 5          # reservas por IP
+LIMITE = 5          # solicitudes por IP
+MAX_FICHERO = 20 * 1024 * 1024  # tope del fichero de solicitudes (unas 40.000)
 VENTANA = 3600      # en una hora
 _vistos: dict[str, list[float]] = {}
 _lock = threading.Lock()
@@ -80,13 +81,18 @@ def avisar(r: dict) -> None:
     usuario, clave = unquote(u.username or ""), unquote(u.password or "")
     remite = RESERVAS_FROM or usuario
     m = EmailMessage()
-    m["Subject"] = f"Reserva flechas amarillas: {r['nombre']} ({r['cantidad']})"
+    tienda = r["tipo"] == "tienda"
+    if tienda:
+        m["Subject"] = f"Flechas amarillas · TIENDA: {r['comercio']} ({r['localidad'] or 'sin localidad'})"
+    else:
+        m["Subject"] = f"Flechas amarillas · reserva: {r['nombre']} ({r['cantidad']})"
     m["From"] = formataddr(("Flechas amarillas web", remite))
     m["To"] = RESERVAS_TO
     m["Reply-To"] = formataddr((r["nombre"], r["email"]))
     m.set_content(
-        "Nueva reserva de «Lo que esconden las flechas amarillas»\n\n"
-        f"Nombre: {r['nombre']}\nCorreo: {r['email']}\nEjemplares: {r['cantidad']}\n"
+        f"Nueva solicitud de «Lo que esconden las flechas amarillas» ({'librería o tienda' if tienda else 'lector'})\n\n"
+        + (f"Comercio: {r['comercio']}\nTeléfono: {r['telefono'] or '-'}\n" if tienda else "")
+        + f"Nombre: {r['nombre']}\nCorreo: {r['email']}\nEjemplares: {r['cantidad']}\n"
         f"Localidad: {r['localidad'] or '-'}\nIdioma de la web: {r['idioma']}\n"
         f"Fecha: {r['fecha']}\n\nMensaje:\n{r['mensaje'] or '-'}\n\n"
         "Responder a este correo contesta directamente a quien reservó.\n"
@@ -128,8 +134,10 @@ class Handler(SimpleHTTPRequestHandler):
             "frame-ancestors 'none'; base-uri 'self'",
         )
         p = self.path.split("?")[0]
-        if p.startswith(("/img/", "/fonts/")) or "?v=" in self.path:
+        if p.startswith("/fonts/") or "?v=" in self.path:
             self.send_header("Cache-Control", "public, max-age=31536000, immutable")
+        elif p.startswith("/img/"):  # las imágenes pueden cambiar o retirarse: caché corta
+            self.send_header("Cache-Control", "public, max-age=86400")
         elif p.endswith((".html", "/")):
             self.send_header("Cache-Control", "no-cache")
         super().end_headers()
@@ -175,13 +183,22 @@ class Handler(SimpleHTTPRequestHandler):
             "localidad": txt("localidad", 120).replace("\n", " "),
             "mensaje": txt("mensaje", 1500),
             "idioma": "en" if d.get("idioma") == "en" else "es",
+            "tipo": "tienda" if d.get("tipo") == "tienda" else "lector",
+            "comercio": txt("comercio", 160).replace("\n", " "),
+            "telefono": txt("telefono", 40).replace("\n", " "),
         }
         try:
-            r["cantidad"] = max(1, min(50, int(d.get("cantidad") or 1)))
+            r["cantidad"] = max(1, min(500, int(d.get("cantidad") or 1)))
         except (TypeError, ValueError):
             r["cantidad"] = 1
         if not r["nombre"] or not EMAIL_RE.match(r["email"]) or d.get("privacidad") != "si":
             return self._json(422, {"error": "datos"})
+        if r["tipo"] == "tienda" and not r["comercio"]:
+            return self._json(422, {"error": "datos"})
+        fichero = DATA / "reservas.jsonl"
+        if fichero.exists() and fichero.stat().st_size > MAX_FICHERO:
+            print("[aviso] reservas.jsonl supera el tope; solicitud rechazada", flush=True)
+            return self._json(503, {"error": "lleno"})
 
         with _lock:
             with open(DATA / "reservas.jsonl", "a", encoding="utf-8") as f:
