@@ -41,15 +41,28 @@ _vistos: dict[str, list[float]] = {}
 _lock = threading.Lock()
 
 
+LIMITE_GLOBAL = 100  # reservas por hora en total, por si alguien rota IPs
+_global: list[float] = []
+
+
 def limitado(ip: str) -> bool:
+    """Límite por IP y global. El puerto solo escucha en local y CF-Connecting-IP
+    la pone Cloudflare en el túnel, así que no se puede falsificar desde fuera."""
     ahora = time.time()
     with _lock:
+        _global[:] = [t for t in _global if ahora - t < VENTANA]
+        if len(_global) >= LIMITE_GLOBAL:
+            return True
+        if len(_vistos) > 5000:  # limpia IPs caducadas para no crecer sin fin
+            for k in [k for k, v in _vistos.items() if not v or ahora - v[-1] >= VENTANA]:
+                del _vistos[k]
         lista = [t for t in _vistos.get(ip, []) if ahora - t < VENTANA]
         if len(lista) >= LIMITE:
             _vistos[ip] = lista
             return True
         lista.append(ahora)
         _vistos[ip] = lista
+        _global.append(ahora)
         return False
 
 
