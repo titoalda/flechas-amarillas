@@ -1,0 +1,18 @@
+services:
+  web:
+    image: python:3.12-alpine
+    container_name: flechasamarillas
+    working_dir: /app
+    command: ["python", "-u", "server.py"]
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      PORT: "8622"
+    volumes:
+      - ./server.py:/app/server.py:ro
+      - ./site:/app/site:ro
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8622:8622"
+    restart: unless-stopped
+    mem_limit: 96m
