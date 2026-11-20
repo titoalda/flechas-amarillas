@@ -41,18 +41,15 @@ _vistos: dict[str, list[float]] = {}
 _lock = threading.Lock()
 
 
-LIMITE_GLOBAL = 100  # reservas por hora en total, por si alguien rota IPs
+LIMITE_GLOBAL = 100  # avisos por correo por hora; pasado el tope se guarda sin avisar
 _global: list[float] = []
 
 
 def limitado(ip: str) -> bool:
-    """Límite por IP y global. El puerto solo escucha en local y CF-Connecting-IP
+    """Límite por IP. El puerto solo escucha en local y CF-Connecting-IP
     la pone Cloudflare en el túnel, así que no se puede falsificar desde fuera."""
     ahora = time.time()
     with _lock:
-        _global[:] = [t for t in _global if ahora - t < VENTANA]
-        if len(_global) >= LIMITE_GLOBAL:
-            return True
         if len(_vistos) > 5000:  # limpia IPs caducadas para no crecer sin fin
             for k in [k for k, v in _vistos.items() if not v or ahora - v[-1] >= VENTANA]:
                 del _vistos[k]
@@ -62,8 +59,18 @@ def limitado(ip: str) -> bool:
             return True
         lista.append(ahora)
         _vistos[ip] = lista
-        _global.append(ahora)
         return False
+
+
+def correo_permitido() -> bool:
+    """Tope global solo para el correo: nadie puede bloquear las reservas de otros."""
+    ahora = time.time()
+    with _lock:
+        _global[:] = [t for t in _global if ahora - t < VENTANA]
+        if len(_global) >= LIMITE_GLOBAL:
+            return False
+        _global.append(ahora)
+        return True
 
 
 def avisar(r: dict) -> None:
@@ -179,7 +186,10 @@ class Handler(SimpleHTTPRequestHandler):
         with _lock:
             with open(DATA / "reservas.jsonl", "a", encoding="utf-8") as f:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        threading.Thread(target=avisar, args=(r,), daemon=True).start()
+        if correo_permitido():
+            threading.Thread(target=avisar, args=(r,), daemon=True).start()
+        else:
+            print("[aviso] tope de correos por hora alcanzado; reserva guardada sin aviso", flush=True)
         return self._json(200, {"ok": True})
 
     def _json(self, code, obj):
