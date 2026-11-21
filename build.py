@@ -11,7 +11,8 @@ from pathlib import Path
 import json
 
 RAIZ = Path(__file__).parent / "site"
-URL = "https://flechasamarillas.titoteca.net"
+URL = "https://flechasamarillas.aldaraalvarez.es"
+WEB3FORMS_KEY = "9730a2ad-8c3b-43d9-b68c-ad611768d778"  # clave pública de Web3Forms (la misma de portamook)
 INDEXAR = False  # en el subdominio provisional no se indexa; True con el dominio propio
 
 # Índice del libro: solo nombres, sin ilustraciones
@@ -438,7 +439,7 @@ def pagina(t):
       <p style="margin-top:1rem">{e(t["con_txt"])}</p>
     </div>
     <div class="formulario aparece" id="formulario">
-      <form novalidate action="/api/reserva" method="post" data-tipo-actual="lector">
+      <form novalidate action="https://api.web3forms.com/submit" method="post" data-tipo-actual="lector" data-wf="{WEB3FORMS_KEY}">
         <input type="hidden" name="idioma" value="{L}">
         <div class="trampa" aria-hidden="true"><label>Web <input type="text" name="web" tabindex="-1" autocomplete="off"></label></div>
         <fieldset class="campo"><legend>{e(t["tipo_leg"])}</legend>

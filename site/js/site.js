@@ -118,18 +118,31 @@
     reglas.forEach(([el, mal, id]) => { const m = mal(); marca(el, m, id); if (m && !primero) primero = el; });
     if (primero) { primero.focus(); return; }
     if (!priv.checked) { muestraError(D.err_priv); priv.focus(); return; }
-    const datos = Object.fromEntries(new FormData(form));
+    const f = Object.fromEntries(new FormData(form));
+    const lang = f.idioma === "en" ? "en" : "es";
+    const t = tipo();
+    const asunto = t === "tienda"
+      ? `Flechas amarillas · TIENDA: ${f.comercio} (${f.localidad || "sin localidad"})`
+      : `Flechas amarillas · reserva: ${f.nombre} (${f.cantidad})`;
+    const datos = {
+      access_key: form.dataset.wf, subject: asunto + (lang === "en" ? " [EN]" : ""), from_name: "Web Flechas amarillas",
+      replyto: f.email, tipo: t, nombre: f.nombre, email: f.email, comercio: f.comercio, telefono: f.telefono,
+      ejemplares: f.cantidad, localidad: f.localidad, mensaje: f.mensaje, idioma: lang,
+      privacidad_aceptada: "sí", botcheck: !!f.web
+    };
+    Object.keys(datos).forEach((k) => { if (datos[k] === "" || datos[k] === undefined) delete datos[k]; });
     const txt = btnTxt.textContent;
     btn.setAttribute("aria-busy", "true"); btn.disabled = true; btnTxt.textContent = D.enviando;
     try {
-      const r = await fetch("/api/reserva", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) });
+      const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(datos) });
+      const res = await r.json().catch(() => ({}));
       if (r.status === 429) throw new Error("lim");
-      if (!r.ok) throw new Error("red");
+      if (!r.ok || !res.success) throw new Error("red");
       caja.querySelector(".hecho-texto").textContent = (tipo() === "tienda" ? D.ok_t : D.ok_l).replace("{email}", email.value.trim());
       caja.classList.add("enviado");
       const h = caja.querySelector(".hecho");
-      const f = h.querySelector(".hecho-flecha");
-      f.style.animation = "none"; void f.offsetWidth; f.style.animation = "";
+      const fl = h.querySelector(".hecho-flecha");
+      fl.style.animation = "none"; void fl.offsetWidth; fl.style.animation = "";
       h.focus();
     } catch (e) {
       muestraError(e.message === "lim" ? D.err_lim : D.err_red);
