@@ -13,7 +13,8 @@ import json
 RAIZ = Path(__file__).parent / "docs"
 URL = "https://flechasamarillas.aldaraalvarez.es"
 WEB3FORMS_KEY = "9730a2ad-8c3b-43d9-b68c-ad611768d778"  # clave pública de Web3Forms (la misma de portamook)
-INDEXAR = False  # en el subdominio provisional no se indexa; True con el dominio propio
+INDEXAR = True
+SITIO_ANALITICA = "-SnVv6aGs1Ub"  # código público del sitio en la analítica (sin cookies)
 
 # Índice del libro: solo nombres, sin ilustraciones
 ACTOS = [
@@ -88,7 +89,7 @@ T = {
             ("Título en inglés", "Behind the Yellow Arrows"),
             ("Texto e ilustraciones", "Aldara Álvarez González"),
             ("Idiomas", "Español e inglés"),
-            ("Páginas", "84, a color"),
+            ("Páginas", "88, a color"),
             ("Formato", "A6, 105 × 148 mm"),
             ("Edición", "2026"),
             ("Precio", "Por confirmar"),
@@ -185,7 +186,7 @@ T = {
             ("Spanish title", "Lo que esconden las flechas amarillas"),
             ("Text and illustrations", "Aldara Álvarez González"),
             ("Languages", "Spanish and English"),
-            ("Pages", "84, in colour"),
+            ("Pages", "88, in colour"),
             ("Format", "A6, 105 × 148 mm"),
             ("Edition", "2026"),
             ("Price", "To be confirmed"),
@@ -315,7 +316,7 @@ def pagina(t):
     "name": "Lo que esconden las flechas amarillas", "alternateName": "Behind the Yellow Arrows",
     "author": {"@type": "Person", "name": "Aldara Álvarez González", "url": "https://aldaraalvarez.es"},
     "illustrator": {"@type": "Person", "name": "Aldara Álvarez González"},
-    "inLanguage": ["es", "en"], "numberOfPages": 84, "bookFormat": "https://schema.org/Paperback",
+    "inLanguage": ["es", "en"], "numberOfPages": 88, "bookFormat": "https://schema.org/Paperback",
     "about": "Camino Portugués por la Costa", "image": URL + "/img/portada.webp",
     "description": t["desc"]}, ensure_ascii=False)}</script>
 </head>
@@ -502,8 +503,55 @@ def pagina(t):
 
 <script id="datos" type="application/json">{datos}</script>
 <script src="{pref}js/site.js?v=__V__" defer></script>
+{ANALITICA}
 </body>
 </html>
+"""
+
+
+ANALITICA = """<script>
+(function(d,l){var u=new URLSearchParams(l.search),q=function(k){return encodeURIComponent(u.get(k)||'')};
+new Image().src='https://nanuve.net/v?site=%s&path='+encodeURIComponent(l.pathname)+'&ref='+encodeURIComponent(d.referrer)
++'&w='+screen.width+'&l='+encodeURIComponent(navigator.language||'')+'&us='+q('utm_source')+'&um='+q('utm_medium')+'&uc='+q('utm_campaign');
+})(document,location);
+</script>""" % SITIO_ANALITICA
+
+
+def sitemap():
+    pag = [("/", "/en/"), ("/en/", "/")]
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
+    for ruta, _ in pag:
+        out.append(f"  <url><loc>{URL}{ruta}</loc>")
+        if ruta in ("/", "/en/"):
+            out += [f'    <xhtml:link rel="alternate" hreflang="es" href="{URL}/"/>',
+                    f'    <xhtml:link rel="alternate" hreflang="en" href="{URL}/en/"/>',
+                    f'    <xhtml:link rel="alternate" hreflang="x-default" href="{URL}/"/>']
+        out.append("  </url>")
+    out.append("</urlset>")
+    return chr(10).join(out) + chr(10)
+
+
+ROBOTS = f"""# Lo que esconden las flechas amarillas
+# Politica de IA: buscadores y asistentes pueden leer y citar la web;
+# el entrenamiento de modelos con su contenido no esta permitido.
+
+User-agent: *
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Meta-ExternalAgent
+User-agent: cohere-ai
+Disallow: /
+
+Sitemap: {URL}/sitemap.xml
 """
 
 
@@ -516,6 +564,8 @@ def main():
         ruta.parent.mkdir(parents=True, exist_ok=True)
         ruta.write_text(pagina(T[clave]).replace("__V__", v), encoding="utf-8", newline="\n")
         print("escrito", ruta.relative_to(RAIZ.parent), flush=True)
+    (RAIZ / "sitemap.xml").write_text(sitemap(), encoding="utf-8", newline=chr(10))
+    (RAIZ / "robots.txt").write_text(ROBOTS, encoding="utf-8", newline=chr(10))
     # Tipografía española: sin preposiciones ni conjunciones a final de línea
     subprocess.run([sys.executable, str(Path(__file__).parent / "tools_nbsp.py"),
                     str(RAIZ / "index.html"), str(RAIZ / "privacidad.html")], check=True)

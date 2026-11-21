@@ -1,2 +1,20 @@
+# Lo que esconden las flechas amarillas
+# Politica de IA: buscadores y asistentes pueden leer y citar la web;
+# el entrenamiento de modelos con su contenido no esta permitido.
+
 User-agent: *
-Disallow:
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Meta-ExternalAgent
+User-agent: cohere-ai
+Disallow: /
+
+Sitemap: https://flechasamarillas.aldaraalvarez.es/sitemap.xml
