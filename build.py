@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera site/index.html (ES) y site/en/index.html (EN) desde una sola plantilla.
+"""Genera docs/index.html (ES) y docs/en/index.html (EN) desde una sola plantilla.
 
 Uso: python build.py
 La web es un dossier de presentación del libro para lectores y para librerías
@@ -10,7 +10,7 @@ from html import escape
 from pathlib import Path
 import json
 
-RAIZ = Path(__file__).parent / "site"
+RAIZ = Path(__file__).parent / "docs"
 URL = "https://flechasamarillas.aldaraalvarez.es"
 WEB3FORMS_KEY = "9730a2ad-8c3b-43d9-b68c-ad611768d778"  # clave pública de Web3Forms (la misma de portamook)
 INDEXAR = False  # en el subdominio provisional no se indexa; True con el dominio propio

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Servidor de la web: sirve site/ y recibe reservas en POST /api/reserva.
+"""Servidor de la web: sirve docs/ y recibe reservas en POST /api/reserva.
 
 Cada reserva se guarda en data/reservas.jsonl y, si hay SMTP configurado,
 se avisa por correo. Solo biblioteca estándar.
@@ -26,7 +26,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 RAIZ = Path(__file__).parent
-SITE = RAIZ / "site"
+SITE = RAIZ / "docs"
 DATA = Path(os.environ.get("DATA_DIR", RAIZ / "data"))
 DATA.mkdir(parents=True, exist_ok=True)
 PORT = int(os.environ.get("PORT", "8622"))
