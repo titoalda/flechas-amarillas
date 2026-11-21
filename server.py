@@ -48,7 +48,7 @@ _global: list[float] = []
 
 def limitado(ip: str) -> bool:
     """Límite por IP. El puerto solo escucha en local y CF-Connecting-IP
-    la pone Cloudflare en el túnel, así que no se puede falsificar desde fuera."""
+    la pone el proxy inverso, así que no se puede falsificar desde fuera."""
     ahora = time.time()
     with _lock:
         if len(_vistos) > 5000:  # limpia IPs caducadas para no crecer sin fin

@@ -21,7 +21,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/poiret-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/lato-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=64a639b2">
+<link rel="stylesheet" href="css/site.css?v=a9e706ae">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Book", "name": "Lo que esconden las flechas amarillas", "alternateName": "Behind the Yellow Arrows", "author": {"@type": "Person", "name": "Aldara Álvarez González", "url": "https://aldaraalvarez.es"}, "illustrator": {"@type": "Person", "name": "Aldara Álvarez González"}, "inLanguage": ["es", "en"], "numberOfPages": 84, "bookFormat": "https://schema.org/Paperback", "about": "Camino Portugués por la Costa", "image": "https://flechasamarillas.titoteca.net/img/portada.webp", "description": "Libro de bolsillo ilustrado en acuarela por Aldara Álvarez González: 25 lugares del Camino Portugués por la Costa, de Oporto a Santiago, en español y en inglés. Para lectores, librerías y tiendas del Camino."}</script>
 </head>
 <body class="sin-js">
@@ -29,7 +29,8 @@
 <header class="cabecera">
   <div class="envoltura">
     <a class="marca" href="/"><img src="img/flecha.png" alt="" width="30" height="14"><span class="marca-larga">Lo que esconden las flechas amarillas</span><span class="marca-corta">Las flechas amarillas</span></a>
-    <nav class="nav" aria-label="Principal">
+    <button type="button" class="menu-boton" aria-expanded="false" aria-controls="menu" aria-label="Menú"><span></span><span></span><span></span></button>
+    <nav class="nav" id="menu" aria-label="Principal">
       <a href="#libro" class="nav-secundario">El libro</a><a href="#contenido-libro" class="nav-secundario">Contenido</a><a href="#librerias" class="nav-secundario">Librerías y tiendas</a><a href="#autora" class="nav-secundario">La autora</a>
       <a class="idioma" href="/en/" hreflang="en" lang="en" aria-label="Read in English">English</a>
       <a class="boton boton-principal" href="#contacto">Contacto</a>
@@ -42,7 +43,7 @@
   <div class="envoltura">
     <div class="portada-texto">
       <p class="antetitulo">Camino Portugués por la Costa · De Oporto a Santiago</p>
-      <h1 class="titulo titulo-xl">Lo que esconden las flechas amarillas</h1>
+      <h1 class="titulo titulo-xl">Lo que esconden<br>las flechas amarillas</h1>
       <p class="en-titulo" lang="en">Behind the Yellow Arrows</p>
       <p class="lema">Detrás de cada flecha amarilla hay algo que nadie te cuenta.</p>
       <p class="lema-en en" lang="en">Behind every yellow arrow there is something nobody tells you.</p>
@@ -54,7 +55,7 @@
       <p class="estado">Edición de 2026 · Precio por confirmar</p>
     </div>
     <div class="libro">
-      <img class="libro-cubierta" src="img/portada-520.webp" srcset="img/portada-520.webp 520w, img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="Cubierta del libro con un mojón de piedra, una vieira y una flecha amarilla junto al mar" width="520" height="735" fetchpriority="high">
+      <div class="libro3d"><img class="libro-cubierta" src="img/portada-520.webp" srcset="img/portada-520.webp 800w, img/portada-1100.webp 1100w, img/portada.webp 1700w" sizes="(max-width:820px) 70vw, 420px" alt="Cubierta del libro con un mojón de piedra, una vieira y una flecha amarilla junto al mar" width="800" height="1128" fetchpriority="high"><span class="lomo" style="background-image:url(img/lomo.webp)"></span></div>
     </div>
   </div>
 </section>
@@ -69,7 +70,7 @@
       <div class="libro-intro-texto"><p>Las flechas amarillas dicen al peregrino por dónde ir, pero no qué hay a su alrededor. Este libro cuenta algo pequeño de 25 lugares del Camino Portugués por la Costa, de Oporto a Santiago: una piedra, una leyenda, un plato.</p><p>No es una guía práctica. No da distancias ni albergues. Es un libro para llevar en el bolsillo y leer en las paradas, y para guardar al volver.</p></div>
     </div>
     <h3 class="sr">Por qué funciona</h3>
-    <ul class="razones aparece"><li><h3>De bolsillo</h3><p>Formato A6 y poco peso. Cabe en la mochila de quien ya carga bastante.</p></li><li><h3>Bilingüe</h3><p>Cada texto en español y, debajo, en inglés sencillo, pensado para peregrinos de cualquier país.</p></li><li><h3>Ilustrado a mano</h3><p>Una acuarela por lugar y una flecha amarilla escondida en cada una.</p></li><li><h3>Un recuerdo del Camino</h3><p>Se lee durante la ruta y se queda como regalo o recuerdo al terminarla.</p></li></ul>
+    <ul class="razones aparece"><li><span class="razon-icono"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="6" width="22" height="36" rx="2.5"/><path d="M13 14h22M19 22h10M19 28h10M19 34h6"/></svg></span><span class="razon-n" aria-hidden="true">01</span><h3>De bolsillo</h3><p>Formato A6 y poco peso. Cabe en la mochila de quien ya carga bastante.</p></li><li><span class="razon-icono"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 11h22a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H18l-7 6v-6H7a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2z"/><path d="M33 19h8a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-3v5l-6-5h-8a2 2 0 0 1-2-2v-3"/></svg></span><span class="razon-n" aria-hidden="true">02</span><h3>Bilingüe</h3><p>Cada texto en español y, debajo, en inglés sencillo, pensado para peregrinos de cualquier país.</p></li><li><span class="razon-icono"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40c2-1 4-5 6-8l4 3c-2 3-5 6-10 5z"/><path d="M18 32L38 8c2-2 5 1 3 3L21 35"/><path d="M12 43c6 0 10-2 14-2"/></svg></span><span class="razon-n" aria-hidden="true">03</span><h3>Ilustrado a mano</h3><p>Una acuarela por lugar y una flecha amarilla escondida en cada una.</p></li><li><span class="razon-icono"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42S7 31 7 19a9 9 0 0 1 17-4 9 9 0 0 1 17 4c0 12-17 23-17 23z"/><path d="M17 22h14m-5-5l5 5-5 5"/></svg></span><span class="razon-n" aria-hidden="true">04</span><h3>Un recuerdo del Camino</h3><p>Se lee durante la ruta y se queda como regalo o recuerdo al terminarla.</p></li></ul>
   </div>
 </section>
 
@@ -80,17 +81,23 @@
       <h2 class="titulo titulo-l">Así es por dentro</h2>
       <p>Cada lugar ocupa una doble página, con la ilustración a la izquierda y la historia a la derecha.</p>
     </div>
-    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/flechas-azules.webp" alt="Un mojón con la flecha azul de Fátima y la amarilla de Santiago" loading="lazy" decoding="async"></div><figcaption><b>Las flechas azules</b><span>Un mojón con la flecha azul de Fátima y la amarilla de Santiago</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/porto.webp" alt="La fachada románica de la Sé do Porto" loading="lazy" decoding="async"></div><figcaption><b>Porto</b><span>La fachada románica de la Sé do Porto</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/baiona.webp" alt="La réplica de la carabela Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>La réplica de la carabela Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/combarro.webp" alt="Hórreos de piedra sobre las rocas" loading="lazy" decoding="async"></div><figcaption><b>Combarro</b><span>Hórreos de piedra sobre las rocas</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/padron.webp" alt="Pimientos de Padrón recién recogidos" loading="lazy" decoding="async"></div><figcaption><b>Padrón</b><span>Pimientos de Padrón recién recogidos</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/santiago.webp" alt="La Praza do Obradoiro, frente a la catedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>La Praza do Obradoiro, frente a la catedral</span></figcaption></figure></div>
+    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/porto.webp" alt="La fachada románica de la Sé do Porto" loading="lazy" decoding="async"></div><figcaption><b>Porto</b><span>La fachada románica de la Sé do Porto</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/flechas-azules.webp" alt="Un mojón con la flecha azul de Fátima y la amarilla de Santiago" loading="lazy" decoding="async"></div><figcaption><b>Las flechas azules</b><span>Un mojón con la flecha azul de Fátima y la amarilla de Santiago</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/baiona.webp" alt="La réplica de la carabela Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>La réplica de la carabela Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/combarro.webp" alt="Hórreos de piedra sobre las rocas" loading="lazy" decoding="async"></div><figcaption><b>Combarro</b><span>Hórreos de piedra sobre las rocas</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/padron.webp" alt="Pimientos de Padrón recién recogidos" loading="lazy" decoding="async"></div><figcaption><b>Padrón</b><span>Pimientos de Padrón recién recogidos</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/santiago.webp" alt="La Praza do Obradoiro, frente a la catedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>La Praza do Obradoiro, frente a la catedral</span></figcaption></figure></div>
+    <div class="dobles">
     <figure class="doble aparece">
-      <img src="img/muestra/doble.webp" alt="Doble página de Vila do Conde con la ilustración del acueducto y el texto en español e inglés" loading="lazy" decoding="async" width="560" height="395">
+      <button type="button" class="ampliable" aria-label="Doble página de Vila do Conde con la ilustración del acueducto y el texto en español e inglés"><img src="img/muestra/doble.webp" data-grande="img/muestra/doble-grande.webp" alt="Doble página de Vila do Conde con la ilustración del acueducto y el texto en español e inglés" loading="lazy" decoding="async" width="1200" height="846"></button>
       <figcaption>Doble página de Vila do Conde</figcaption>
     </figure>
+    <figure class="doble aparece">
+      <button type="button" class="ampliable" aria-label="Doble página de Oia con la ilustración del monasterio y el texto en español e inglés"><img src="img/muestra/doble-oia.webp" data-grande="img/muestra/doble-oia-grande.webp" alt="Doble página de Oia con la ilustración del monasterio y el texto en español e inglés" loading="lazy" decoding="async" width="1200" height="846"></button>
+      <figcaption>Doble página de Oia</figcaption>
+    </figure>
+    </div>
   </div>
 </section>
 
 <section class="seccion seccion-calida" id="contenido-libro">
   <div class="envoltura camino">
-    <figure class="mapa aparece"><img class="acuarela" src="img/muestra/mapa.webp" alt="Mapa en acuarela de la costa de Portugal y Galicia con los cuatro actos del camino" loading="lazy" width="640" height="872"></figure>
+    <figure class="mapa aparece"><img class="acuarela" src="img/muestra/mapa.webp" alt="Mapa en acuarela de la costa de Portugal y Galicia con los cuatro actos del camino" loading="lazy" width="1100" height="1616"></figure>
     <div>
       <div class="cabeza-seccion aparece">
         <p class="antetitulo">Contenido</p>
@@ -195,6 +202,6 @@
 <div class="barra-movil"><a class="boton boton-principal" href="#contacto">Reserva tu ejemplar <img class="boton-flecha" src="img/flecha.png" alt="" width="26" height="12"></a></div>
 
 <script id="datos" type="application/json">{"t": {"enviando": "Enviando…", "enviar_l": "Reservar sin compromiso", "enviar_t": "Pedir información", "err_nombre": "Escribe tu nombre.", "err_email": "Revisa el correo, parece incompleto.", "err_comercio": "Escribe el nombre del comercio.", "err_priv": "Necesitamos que aceptes la política de privacidad.", "err_red": "No se ha podido enviar. Prueba de nuevo en un momento.", "err_lim": "Has enviado varias solicitudes seguidas. Prueba de nuevo dentro de un rato.", "ok_l": "Gracias. Te escribiremos a {email} cuando el libro esté impreso. Buen camino.", "ok_t": "Gracias. Te escribiremos a {email} con las condiciones para tu tienda."}}</script>
-<script src="js/site.js?v=64a639b2" defer></script>
+<script src="js/site.js?v=a9e706ae" defer></script>
 </body>
 </html>

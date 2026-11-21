@@ -27,8 +27,8 @@ ACTOS = [
 ]
 # Muestra: 6 acuarelas (id, nombre, pie ES, pie EN, ancho, alto del webp de 800)
 MUESTRA = [
-    ("flechas-azules", "Las flechas azules", "The Blue Arrows", "Un mojón con la flecha azul de Fátima y la amarilla de Santiago", "A waymarker with Fátima’s blue arrow and Santiago’s yellow one"),
     ("porto", "Porto", "Porto", "La fachada románica de la Sé do Porto", "The Romanesque facade of Porto Cathedral"),
+    ("flechas-azules", "Las flechas azules", "The Blue Arrows", "Un mojón con la flecha azul de Fátima y la amarilla de Santiago", "A waymarker with Fátima’s blue arrow and Santiago’s yellow one"),
     ("baiona", "Baiona", "Baiona", "La réplica de la carabela Pinta", "The replica of the caravel Pinta"),
     ("combarro", "Combarro", "Combarro", "Hórreos de piedra sobre las rocas", "Stone granaries over the rocks"),
     ("padron", "Padrón", "Padrón", "Pimientos de Padrón recién recogidos", "Freshly picked Padrón peppers"),
@@ -45,7 +45,7 @@ T = {
         nav=[("#libro", "El libro"), ("#contenido-libro", "Contenido"), ("#librerias", "Librerías y tiendas"), ("#autora", "La autora")],
         contacto="Contacto",
         ante="Camino Portugués por la Costa · De Oporto a Santiago",
-        h1="Lo que esconden las flechas amarillas",
+        h1="Lo que esconden las flechas amarillas", h1_html="Lo que esconden<br>las flechas amarillas",
         h1_en="Behind the Yellow Arrows",
         lema="Detrás de cada flecha amarilla hay algo que nadie te cuenta.",
         lema_en="Behind every yellow arrow there is something nobody tells you.",
@@ -71,6 +71,8 @@ T = {
         muestra_txt="Cada lugar ocupa una doble página, con la ilustración a la izquierda y la historia a la derecha.",
         doble_alt="Doble página de Vila do Conde con la ilustración del acueducto y el texto en español e inglés",
         doble_pie="Doble página de Vila do Conde",
+        doble2_alt="Doble página de Oia con la ilustración del monasterio y el texto en español e inglés",
+        doble2_pie="Doble página de Oia",
         contenido_ante="Contenido",
         contenido_h="Cuatro actos, de Oporto a Santiago",
         contenido_txt="El libro sigue el camino en el orden en que se recorre. Además, cuatro fichas temáticas y un epílogo.",
@@ -138,7 +140,7 @@ T = {
         nav=[("#libro", "The book"), ("#contenido-libro", "Contents"), ("#librerias", "Bookshops"), ("#autora", "The author")],
         contacto="Contact",
         ante="Portuguese Coastal Way · From Porto to Santiago",
-        h1="Behind the Yellow Arrows",
+        h1="Behind the Yellow Arrows", h1_html="Behind the<br>Yellow Arrows",
         h1_en="Lo que esconden las flechas amarillas",
         lema="Behind every yellow arrow there is something nobody tells you.",
         lema_en="Detrás de cada flecha amarilla hay algo que nadie te cuenta.",
@@ -164,6 +166,8 @@ T = {
         muestra_txt="Each place has a double page, with the illustration on the left and its story on the right.",
         doble_alt="Double page about Vila do Conde with the aqueduct illustration and the text in Spanish and English",
         doble_pie="Double page about Vila do Conde",
+        doble2_alt="Double page about Oia with the monastery illustration and the text in Spanish and English",
+        doble2_pie="Double page about Oia",
         contenido_ante="Contents",
         contenido_h="Four acts, from Porto to Santiago",
         contenido_txt="The book follows the Way in the order you walk it. It also has four theme pages and an epilogue.",
@@ -247,7 +251,13 @@ def pagina(t):
 
     nav = "".join(f'<a href="{h}" class="nav-secundario">{e(x)}</a>' for h, x in t["nav"])
     libro_txt = "".join(f"<p>{e(p)}</p>" for p in t["libro_txt"])
-    razones = "".join(f'<li><h3>{e(a)}</h3><p>{e(b)}</p></li>' for a, b in t["razones"])
+    ICONOS = [
+        '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="6" width="22" height="36" rx="2.5"/><path d="M13 14h22M19 22h10M19 28h10M19 34h6"/></svg>',
+        '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 11h22a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H18l-7 6v-6H7a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2z"/><path d="M33 19h8a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-3v5l-6-5h-8a2 2 0 0 1-2-2v-3"/></svg>',
+        '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40c2-1 4-5 6-8l4 3c-2 3-5 6-10 5z"/><path d="M18 32L38 8c2-2 5 1 3 3L21 35"/><path d="M12 43c6 0 10-2 14-2"/></svg>',
+        '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42S7 31 7 19a9 9 0 0 1 17-4 9 9 0 0 1 17 4c0 12-17 23-17 23z"/><path d="M17 22h14m-5-5l5 5-5 5"/></svg>',
+    ]
+    razones = "".join(f'<li><span class="razon-icono">{ICONOS[i]}</span><span class="razon-n" aria-hidden="true">0{i+1}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(t["razones"]))
 
     muestra = ""
     for mid, nes, nen, pes, pen in MUESTRA:
@@ -305,7 +315,8 @@ def pagina(t):
 <header class="cabecera">
   <div class="envoltura">
     <a class="marca" href="{R}/"><img src="{flecha}" alt="" width="30" height="14"><span class="marca-larga">{e(t["marca"])}</span><span class="marca-corta">{e(t["marca_corta"])}</span></a>
-    <nav class="nav" aria-label="{'Principal' if es else 'Main'}">
+    <button type="button" class="menu-boton" aria-expanded="false" aria-controls="menu" aria-label="{'Menú' if es else 'Menu'}"><span></span><span></span><span></span></button>
+    <nav class="nav" id="menu" aria-label="{'Principal' if es else 'Main'}">
       {nav}
       <a class="idioma" href="{t["otro"]}" hreflang="{otro}" lang="{otro}" aria-label="{e(t["otro_aria"])}">{e(t["otro_txt"])}</a>
       <a class="boton boton-principal" href="#contacto">{e(t["contacto"])}</a>
@@ -318,7 +329,7 @@ def pagina(t):
   <div class="envoltura">
     <div class="portada-texto">
       <p class="antetitulo">{e(t["ante"])}</p>
-      <h1 class="titulo titulo-xl">{e(t["h1"])}</h1>
+      <h1 class="titulo titulo-xl">{t["h1_html"]}</h1>
       <p class="en-titulo" lang="{otro}">{e(t["h1_en"])}</p>
       <p class="lema">{e(t["lema"])}</p>
       <p class="lema-en en" lang="{otro}">{e(t["lema_en"])}</p>
@@ -330,7 +341,7 @@ def pagina(t):
       <p class="estado">{e(t["estado"])}</p>
     </div>
     <div class="libro">
-      <img class="libro-cubierta" src="{pref}img/portada-520.webp" srcset="{pref}img/portada-520.webp 520w, {pref}img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="{e(t["portada_alt"])}" width="520" height="735" fetchpriority="high">
+      <div class="libro3d"><img class="libro-cubierta" src="{pref}img/portada-520.webp" srcset="{pref}img/portada-520.webp 800w, {pref}img/portada-1100.webp 1100w, {pref}img/portada.webp 1700w" sizes="(max-width:820px) 70vw, 420px" alt="{e(t["portada_alt"])}" width="800" height="1128" fetchpriority="high"><span class="lomo" style="background-image:url({pref}img/lomo.webp)"></span></div>
     </div>
   </div>
 </section>
@@ -357,16 +368,22 @@ def pagina(t):
       <p>{e(t["muestra_txt"])}</p>
     </div>
     <div class="muestra">{muestra}</div>
+    <div class="dobles">
     <figure class="doble aparece">
-      <img src="{pref}img/muestra/doble.webp" alt="{e(t["doble_alt"])}" loading="lazy" decoding="async" width="560" height="395">
+      <button type="button" class="ampliable" aria-label="{e(t["doble_alt"])}"><img src="{pref}img/muestra/doble.webp" data-grande="{pref}img/muestra/doble-grande.webp" alt="{e(t["doble_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
       <figcaption>{e(t["doble_pie"])}</figcaption>
     </figure>
+    <figure class="doble aparece">
+      <button type="button" class="ampliable" aria-label="{e(t["doble2_alt"])}"><img src="{pref}img/muestra/doble-oia.webp" data-grande="{pref}img/muestra/doble-oia-grande.webp" alt="{e(t["doble2_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
+      <figcaption>{e(t["doble2_pie"])}</figcaption>
+    </figure>
+    </div>
   </div>
 </section>
 
 <section class="seccion seccion-calida" id="contenido-libro">
   <div class="envoltura camino">
-    <figure class="mapa aparece"><img class="acuarela" src="{pref}img/muestra/mapa.webp" alt="{e(t["mapa_alt"])}" loading="lazy" width="640" height="872"></figure>
+    <figure class="mapa aparece"><img class="acuarela" src="{pref}img/muestra/mapa.webp" alt="{e(t["mapa_alt"])}" loading="lazy" width="1100" height="1616"></figure>
     <div>
       <div class="cabeza-seccion aparece">
         <p class="antetitulo">{e(t["contenido_ante"])}</p>

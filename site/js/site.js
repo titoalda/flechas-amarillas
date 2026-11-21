@@ -16,11 +16,57 @@
   }, { rootMargin: "-64px 0px 0px 0px" }).observe(document.querySelector(".portada"));
   new IntersectionObserver(([en]) => { enContacto = en.isIntersecting; pintaBarra(); }).observe(contacto);
 
+  /* Menú hamburguesa */
+  const mb = document.querySelector(".menu-boton"), menu = document.getElementById("menu");
+  if (mb && menu) {
+    const pon = (v) => { menu.classList.toggle("abierto", v); mb.setAttribute("aria-expanded", String(v)); };
+    mb.addEventListener("click", () => pon(!menu.classList.contains("abierto")));
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => pon(false)));
+    document.addEventListener("keydown", (ev) => { if (ev.key === "Escape") pon(false); });
+  }
+
   /* Aparición suave */
   const io = new IntersectionObserver((ents) => {
     ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visto"); io.unobserve(en.target); } });
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".aparece").forEach((el) => io.observe(el));
+
+  /* Libro: sigue al ratón con un giro suave (muelle) */
+  const libro = document.querySelector(".libro3d");
+  if (libro && matchMedia("(hover:hover) and (prefers-reduced-motion:no-preference)").matches) {
+    const base = { y: 22, x: 3, s: 1 };
+    let tY = base.y, tX = base.x, tS = 1, cY = base.y, cX = base.x, cS = 1, raf = 0, dentro = false;
+    const paso = () => {
+      cY += (tY - cY) * 0.1; cX += (tX - cX) * 0.1; cS += (tS - cS) * 0.1;
+      libro.style.transform = `rotateY(${cY.toFixed(2)}deg) rotateX(${cX.toFixed(2)}deg) scale(${cS.toFixed(3)})`;
+      const quieto = Math.abs(tY - cY) < 0.01 && Math.abs(tX - cX) < 0.01 && Math.abs(tS - cS) < 0.001;
+      raf = (!dentro && quieto) ? 0 : requestAnimationFrame(paso);
+    };
+    const caja = libro.parentElement;
+    caja.addEventListener("mouseenter", () => { dentro = true; tS = 1.05; if (!raf) raf = requestAnimationFrame(paso); });
+    caja.addEventListener("mousemove", (ev) => {
+      const r = caja.getBoundingClientRect();
+      const nx = (ev.clientX - r.left) / r.width * 2 - 1, ny = (ev.clientY - r.top) / r.height * 2 - 1;
+      tY = base.y + nx * 12; tX = base.x - ny * 8;
+    });
+    caja.addEventListener("mouseleave", () => { dentro = false; tY = base.y; tX = base.x; tS = 1; if (!raf) raf = requestAnimationFrame(paso); });
+  }
+
+  /* Doble página: se amplía al pulsar */
+  document.querySelectorAll(".ampliable").forEach((bt) => bt.addEventListener("click", () => {
+    const z = document.createElement("div");
+    z.className = "zoom"; z.setAttribute("role", "dialog"); z.setAttribute("aria-modal", "true");
+    const im = bt.querySelector("img").cloneNode();
+    im.removeAttribute("loading"); im.src = im.dataset.grande || im.src;
+    z.appendChild(im); document.body.appendChild(z);
+    requestAnimationFrame(() => requestAnimationFrame(() => z.classList.add("abierto")));
+    const cierra = () => {
+      z.classList.remove("abierto"); document.removeEventListener("keydown", tecla);
+      setTimeout(() => { z.remove(); bt.focus(); }, 320);
+    };
+    const tecla = (ev) => { if (ev.key === "Escape") cierra(); };
+    z.addEventListener("click", cierra); document.addEventListener("keydown", tecla);
+  }));
 
   /* Formulario */
   const caja = document.getElementById("formulario");
