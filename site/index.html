@@ -21,7 +21,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/poiret-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/lato-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=1a266e00">
+<link rel="stylesheet" href="css/site.css?v=64a639b2">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Book", "name": "Lo que esconden las flechas amarillas", "alternateName": "Behind the Yellow Arrows", "author": {"@type": "Person", "name": "Aldara Álvarez González", "url": "https://aldaraalvarez.es"}, "illustrator": {"@type": "Person", "name": "Aldara Álvarez González"}, "inLanguage": ["es", "en"], "numberOfPages": 84, "bookFormat": "https://schema.org/Paperback", "about": "Camino Portugués por la Costa", "image": "https://flechasamarillas.titoteca.net/img/portada.webp", "description": "Libro de bolsillo ilustrado en acuarela por Aldara Álvarez González: 25 lugares del Camino Portugués por la Costa, de Oporto a Santiago, en español y en inglés. Para lectores, librerías y tiendas del Camino."}</script>
 </head>
 <body class="sin-js">
@@ -54,9 +54,7 @@
       <p class="estado">Edición de 2026 · Precio por confirmar</p>
     </div>
     <div class="libro">
-      <div class="libro-cubierta"><img src="img/portada-520.webp" srcset="img/portada-520.webp 520w, img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="Cubierta del libro con un mojón de piedra, una vieira y una flecha amarilla junto al mar" width="520" height="735" fetchpriority="high"></div>
-      <div class="libro-sombra"></div>
-      <img class="flecha-portada" src="img/flecha.png" alt="" width="150" height="68">
+      <img class="libro-cubierta" src="img/portada-520.webp" srcset="img/portada-520.webp 520w, img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="Cubierta del libro con un mojón de piedra, una vieira y una flecha amarilla junto al mar" width="520" height="735" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -82,7 +80,7 @@
       <h2 class="titulo titulo-l">Así es por dentro</h2>
       <p>Cada lugar ocupa una doble página, con la ilustración a la izquierda y la historia a la derecha.</p>
     </div>
-    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/flechas-azules.webp" alt="Un mojón con la flecha azul de Fátima y la amarilla de Santiago" loading="lazy" decoding="async"></div><figcaption><b>Las flechas azules</b><span>Un mojón con la flecha azul de Fátima y la amarilla de Santiago</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/baiona.webp" alt="La réplica de la carabela Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>La réplica de la carabela Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/santiago.webp" alt="La Praza do Obradoiro, frente a la catedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>La Praza do Obradoiro, frente a la catedral</span></figcaption></figure></div>
+    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/flechas-azules.webp" alt="Un mojón con la flecha azul de Fátima y la amarilla de Santiago" loading="lazy" decoding="async"></div><figcaption><b>Las flechas azules</b><span>Un mojón con la flecha azul de Fátima y la amarilla de Santiago</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/porto.webp" alt="La fachada románica de la Sé do Porto" loading="lazy" decoding="async"></div><figcaption><b>Porto</b><span>La fachada románica de la Sé do Porto</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/baiona.webp" alt="La réplica de la carabela Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>La réplica de la carabela Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/combarro.webp" alt="Hórreos de piedra sobre las rocas" loading="lazy" decoding="async"></div><figcaption><b>Combarro</b><span>Hórreos de piedra sobre las rocas</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/padron.webp" alt="Pimientos de Padrón recién recogidos" loading="lazy" decoding="async"></div><figcaption><b>Padrón</b><span>Pimientos de Padrón recién recogidos</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="img/muestra/santiago.webp" alt="La Praza do Obradoiro, frente a la catedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>La Praza do Obradoiro, frente a la catedral</span></figcaption></figure></div>
     <figure class="doble aparece">
       <img src="img/muestra/doble.webp" alt="Doble página de Vila do Conde con la ilustración del acueducto y el texto en español e inglés" loading="lazy" decoding="async" width="560" height="395">
       <figcaption>Doble página de Vila do Conde</figcaption>
@@ -156,10 +154,12 @@
             <label><input type="radio" name="tipo" value="tienda"> Librería o tienda</label>
           </div>
         </fieldset>
-        <div class="campo solo-tienda"><label for="f-comercio">Nombre del comercio</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">Escribe el nombre del comercio.</p></div>
-        <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">Escribe tu nombre.</p></div>
-        <div class="fila fila-email">
+        <div class="fila">
+          <div class="campo"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">Escribe tu nombre.</p></div>
           <div class="campo"><label for="f-email">Correo electrónico</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" spellcheck="false"><p class="campo-error" id="e-email">Revisa el correo, parece incompleto.</p></div>
+        </div>
+        <div class="fila solo-tienda">
+          <div class="campo solo-tienda"><label for="f-comercio">Nombre del comercio</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">Escribe el nombre del comercio.</p></div>
           <div class="campo solo-tienda"><label for="f-telefono">Teléfono <span class="opcional">(opcional)</span></label><input id="f-telefono" name="telefono" type="tel" autocomplete="tel" maxlength="40"></div>
         </div>
         <div class="fila">
@@ -168,7 +168,7 @@
           </div>
           <div class="campo"><label for="f-localidad">Localidad <span class="opcional solo-lector-txt">(opcional)</span></label><input id="f-localidad" name="localidad" autocomplete="address-level2" maxlength="120"></div>
         </div>
-        <div class="campo"><label for="f-mensaje">Mensaje <span class="opcional">(opcional)</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="3"></textarea></div>
+        <div class="campo"><label for="f-mensaje">Mensaje <span class="opcional">(opcional)</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="2"></textarea></div>
         <label class="consentimiento"><input type="checkbox" name="privacidad" value="si" required id="f-priv"><span>He leído la <a href="/privacidad.html">política de privacidad</a> y acepto que se usen mis datos solo para responder a esta solicitud.</span></label>
         <button class="boton boton-principal" type="submit"><span class="boton-texto">Reservar sin compromiso</span> <img class="boton-flecha" src="img/flecha.png" alt="" width="26" height="12"></button>
         <p class="formulario-error" role="alert"></p>
@@ -195,6 +195,6 @@
 <div class="barra-movil"><a class="boton boton-principal" href="#contacto">Reserva tu ejemplar <img class="boton-flecha" src="img/flecha.png" alt="" width="26" height="12"></a></div>
 
 <script id="datos" type="application/json">{"t": {"enviando": "Enviando…", "enviar_l": "Reservar sin compromiso", "enviar_t": "Pedir información", "err_nombre": "Escribe tu nombre.", "err_email": "Revisa el correo, parece incompleto.", "err_comercio": "Escribe el nombre del comercio.", "err_priv": "Necesitamos que aceptes la política de privacidad.", "err_red": "No se ha podido enviar. Prueba de nuevo en un momento.", "err_lim": "Has enviado varias solicitudes seguidas. Prueba de nuevo dentro de un rato.", "ok_l": "Gracias. Te escribiremos a {email} cuando el libro esté impreso. Buen camino.", "ok_t": "Gracias. Te escribiremos a {email} con las condiciones para tu tienda."}}</script>
-<script src="js/site.js?v=1a266e00" defer></script>
+<script src="js/site.js?v=64a639b2" defer></script>
 </body>
 </html>

@@ -21,7 +21,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/poiret-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/lato-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=1a266e00">
+<link rel="stylesheet" href="../css/site.css?v=64a639b2">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Book", "name": "Lo que esconden las flechas amarillas", "alternateName": "Behind the Yellow Arrows", "author": {"@type": "Person", "name": "Aldara Álvarez González", "url": "https://aldaraalvarez.es"}, "illustrator": {"@type": "Person", "name": "Aldara Álvarez González"}, "inLanguage": ["es", "en"], "numberOfPages": 84, "bookFormat": "https://schema.org/Paperback", "about": "Camino Portugués por la Costa", "image": "https://flechasamarillas.titoteca.net/img/portada.webp", "description": "A pocket book illustrated in watercolour by Aldara Álvarez González: 25 places on the Portuguese Coastal Way, from Porto to Santiago, in Spanish and English. For readers, bookshops and shops on the Camino."}</script>
 </head>
 <body class="sin-js">
@@ -54,9 +54,7 @@
       <p class="estado">2026 edition · Price to be confirmed</p>
     </div>
     <div class="libro">
-      <div class="libro-cubierta"><img src="../img/portada-520.webp" srcset="../img/portada-520.webp 520w, ../img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="Book cover with a stone waymarker, a scallop shell and a yellow arrow by the sea" width="520" height="735" fetchpriority="high"></div>
-      <div class="libro-sombra"></div>
-      <img class="flecha-portada" src="../img/flecha.png" alt="" width="150" height="68">
+      <img class="libro-cubierta" src="../img/portada-520.webp" srcset="../img/portada-520.webp 520w, ../img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="Book cover with a stone waymarker, a scallop shell and a yellow arrow by the sea" width="520" height="735" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -82,7 +80,7 @@
       <h2 class="titulo titulo-l">What it looks like inside</h2>
       <p>Each place has a double page, with the illustration on the left and its story on the right.</p>
     </div>
-    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/flechas-azules.webp" alt="A waymarker with Fátima’s blue arrow and Santiago’s yellow one" loading="lazy" decoding="async"></div><figcaption><b>The Blue Arrows</b><span>A waymarker with Fátima’s blue arrow and Santiago’s yellow one</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/baiona.webp" alt="The replica of the caravel Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>The replica of the caravel Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/santiago.webp" alt="Praza do Obradoiro, facing the cathedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>Praza do Obradoiro, facing the cathedral</span></figcaption></figure></div>
+    <div class="muestra"><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/flechas-azules.webp" alt="A waymarker with Fátima’s blue arrow and Santiago’s yellow one" loading="lazy" decoding="async"></div><figcaption><b>The Blue Arrows</b><span>A waymarker with Fátima’s blue arrow and Santiago’s yellow one</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/porto.webp" alt="The Romanesque facade of Porto Cathedral" loading="lazy" decoding="async"></div><figcaption><b>Porto</b><span>The Romanesque facade of Porto Cathedral</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/baiona.webp" alt="The replica of the caravel Pinta" loading="lazy" decoding="async"></div><figcaption><b>Baiona</b><span>The replica of the caravel Pinta</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/combarro.webp" alt="Stone granaries over the rocks" loading="lazy" decoding="async"></div><figcaption><b>Combarro</b><span>Stone granaries over the rocks</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/padron.webp" alt="Freshly picked Padrón peppers" loading="lazy" decoding="async"></div><figcaption><b>Padrón</b><span>Freshly picked Padrón peppers</span></figcaption></figure><figure class="aparece"><div class="muestra-img"><img class="acuarela" src="../img/muestra/santiago.webp" alt="Praza do Obradoiro, facing the cathedral" loading="lazy" decoding="async"></div><figcaption><b>Santiago de Compostela</b><span>Praza do Obradoiro, facing the cathedral</span></figcaption></figure></div>
     <figure class="doble aparece">
       <img src="../img/muestra/doble.webp" alt="Double page about Vila do Conde with the aqueduct illustration and the text in Spanish and English" loading="lazy" decoding="async" width="560" height="395">
       <figcaption>Double page about Vila do Conde</figcaption>
@@ -156,10 +154,12 @@
             <label><input type="radio" name="tipo" value="tienda"> Bookshop or shop</label>
           </div>
         </fieldset>
-        <div class="campo solo-tienda"><label for="f-comercio">Shop name</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">Please write the shop name.</p></div>
-        <div class="campo"><label for="f-nombre">Name</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">Please write your name.</p></div>
-        <div class="fila fila-email">
+        <div class="fila">
+          <div class="campo"><label for="f-nombre">Name</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">Please write your name.</p></div>
           <div class="campo"><label for="f-email">Email</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" spellcheck="false"><p class="campo-error" id="e-email">Please check your email, it looks incomplete.</p></div>
+        </div>
+        <div class="fila solo-tienda">
+          <div class="campo solo-tienda"><label for="f-comercio">Shop name</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">Please write the shop name.</p></div>
           <div class="campo solo-tienda"><label for="f-telefono">Phone <span class="opcional">(optional)</span></label><input id="f-telefono" name="telefono" type="tel" autocomplete="tel" maxlength="40"></div>
         </div>
         <div class="fila">
@@ -168,7 +168,7 @@
           </div>
           <div class="campo"><label for="f-localidad">Town or city <span class="opcional solo-lector-txt">(optional)</span></label><input id="f-localidad" name="localidad" autocomplete="address-level2" maxlength="120"></div>
         </div>
-        <div class="campo"><label for="f-mensaje">Message <span class="opcional">(optional)</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="3"></textarea></div>
+        <div class="campo"><label for="f-mensaje">Message <span class="opcional">(optional)</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="2"></textarea></div>
         <label class="consentimiento"><input type="checkbox" name="privacidad" value="si" required id="f-priv"><span>I have read the <a href="/en/privacidad.html">privacy policy</a> and agree to my data being used only to answer this request.</span></label>
         <button class="boton boton-principal" type="submit"><span class="boton-texto">Reserve, no commitment</span> <img class="boton-flecha" src="../img/flecha.png" alt="" width="26" height="12"></button>
         <p class="formulario-error" role="alert"></p>
@@ -195,6 +195,6 @@
 <div class="barra-movil"><a class="boton boton-principal" href="#contacto">Reserve your copy <img class="boton-flecha" src="../img/flecha.png" alt="" width="26" height="12"></a></div>
 
 <script id="datos" type="application/json">{"t": {"enviando": "Sending…", "enviar_l": "Reserve, no commitment", "enviar_t": "Ask for information", "err_nombre": "Please write your name.", "err_email": "Please check your email, it looks incomplete.", "err_comercio": "Please write the shop name.", "err_priv": "Please accept the privacy policy.", "err_red": "It could not be sent. Please try again in a moment.", "err_lim": "You have sent several requests in a row. Please try again later.", "ok_l": "Thank you. We will write to {email} when the book is printed. Buen camino.", "ok_t": "Thank you. We will write to {email} with the terms for your shop."}}</script>
-<script src="../js/site.js?v=1a266e00" defer></script>
+<script src="../js/site.js?v=64a639b2" defer></script>
 </body>
 </html>

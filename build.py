@@ -3,7 +3,7 @@
 
 Uso: python build.py
 La web es un dossier de presentación del libro para lectores y para librerías
-y tiendas. Enseña poco del interior a propósito (3 acuarelas y 1 doble página).
+y tiendas. Enseña poco del interior a propósito (6 acuarelas y 1 doble página).
 Los textos están aquí abajo; si cambia uno, cámbialo en los dos idiomas.
 """
 from html import escape
@@ -25,10 +25,13 @@ ACTOS = [
     ("Los últimos kilómetros", "The final kilometres",
      ["Padrón", "A Escravitude", "Milladoiro", "Santiago de Compostela"]),
 ]
-# Muestra: 3 acuarelas (id, nombre, pie ES, pie EN, ancho, alto del webp de 800)
+# Muestra: 6 acuarelas (id, nombre, pie ES, pie EN, ancho, alto del webp de 800)
 MUESTRA = [
     ("flechas-azules", "Las flechas azules", "The Blue Arrows", "Un mojón con la flecha azul de Fátima y la amarilla de Santiago", "A waymarker with Fátima’s blue arrow and Santiago’s yellow one"),
+    ("porto", "Porto", "Porto", "La fachada románica de la Sé do Porto", "The Romanesque facade of Porto Cathedral"),
     ("baiona", "Baiona", "Baiona", "La réplica de la carabela Pinta", "The replica of the caravel Pinta"),
+    ("combarro", "Combarro", "Combarro", "Hórreos de piedra sobre las rocas", "Stone granaries over the rocks"),
+    ("padron", "Padrón", "Padrón", "Pimientos de Padrón recién recogidos", "Freshly picked Padrón peppers"),
     ("santiago", "Santiago de Compostela", "Santiago de Compostela", "La Praza do Obradoiro, frente a la catedral", "Praza do Obradoiro, facing the cathedral"),
 ]
 
@@ -327,9 +330,7 @@ def pagina(t):
       <p class="estado">{e(t["estado"])}</p>
     </div>
     <div class="libro">
-      <div class="libro-cubierta"><img src="{pref}img/portada-520.webp" srcset="{pref}img/portada-520.webp 520w, {pref}img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="{e(t["portada_alt"])}" width="520" height="735" fetchpriority="high"></div>
-      <div class="libro-sombra"></div>
-      <img class="flecha-portada" src="{flecha}" alt="" width="150" height="68">
+      <img class="libro-cubierta" src="{pref}img/portada-520.webp" srcset="{pref}img/portada-520.webp 520w, {pref}img/portada.webp 900w" sizes="(max-width:820px) 74vw, 420px" alt="{e(t["portada_alt"])}" width="520" height="735" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -429,10 +430,12 @@ def pagina(t):
             <label><input type="radio" name="tipo" value="tienda"> {e(t["tipo_tienda"])}</label>
           </div>
         </fieldset>
-        <div class="campo solo-tienda"><label for="f-comercio">{e(t["f_comercio"])}</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">{e(t["f_err_comercio"])}</p></div>
-        <div class="campo"><label for="f-nombre">{e(t["f_nombre"])}</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">{e(t["f_err_nombre"])}</p></div>
-        <div class="fila fila-email">
+        <div class="fila">
+          <div class="campo"><label for="f-nombre">{e(t["f_nombre"])}</label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"><p class="campo-error" id="e-nombre">{e(t["f_err_nombre"])}</p></div>
           <div class="campo"><label for="f-email">{e(t["f_email"])}</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="160" spellcheck="false"><p class="campo-error" id="e-email">{e(t["f_err_email"])}</p></div>
+        </div>
+        <div class="fila solo-tienda">
+          <div class="campo solo-tienda"><label for="f-comercio">{e(t["f_comercio"])}</label><input id="f-comercio" name="comercio" autocomplete="organization" maxlength="160"><p class="campo-error" id="e-comercio">{e(t["f_err_comercio"])}</p></div>
           <div class="campo solo-tienda"><label for="f-telefono">{e(t["f_telefono"])} <span class="opcional">{e(t["f_opcional"])}</span></label><input id="f-telefono" name="telefono" type="tel" autocomplete="tel" maxlength="40"></div>
         </div>
         <div class="fila">
@@ -441,7 +444,7 @@ def pagina(t):
           </div>
           <div class="campo"><label for="f-localidad">{e(t["f_localidad"])} <span class="opcional solo-lector-txt">{e(t["f_opcional"])}</span></label><input id="f-localidad" name="localidad" autocomplete="address-level2" maxlength="120"></div>
         </div>
-        <div class="campo"><label for="f-mensaje">{e(t["f_mensaje"])} <span class="opcional">{e(t["f_opcional"])}</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="3"></textarea></div>
+        <div class="campo"><label for="f-mensaje">{e(t["f_mensaje"])} <span class="opcional">{e(t["f_opcional"])}</span></label><textarea id="f-mensaje" name="mensaje" maxlength="1500" rows="2"></textarea></div>
         <label class="consentimiento"><input type="checkbox" name="privacidad" value="si" required id="f-priv"><span>{t["f_privacidad"].format(raiz=R)}</span></label>
         <button class="boton boton-principal" type="submit"><span class="boton-texto">{e(t["f_enviar_l"])}</span> <img class="boton-flecha" src="{flecha}" alt="" width="26" height="12"></button>
         <p class="formulario-error" role="alert"></p>
