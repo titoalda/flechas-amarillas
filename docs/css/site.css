@@ -157,6 +157,8 @@ p,li,blockquote{text-wrap:pretty}
 @media (max-width:700px){.dobles{grid-template-columns:1fr}}
 .doble{margin:0}
 .doble-movil{display:none}
+.salto-m{display:none}
+.muestra .muestra-img{width:100%;aspect-ratio:23/24;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
 .icono-ext{vertical-align:-1px;margin-left:.2em}
 .doble img{width:100%;box-shadow:var(--sombra);border-radius:3px}
 .ampliable{all:unset;display:block;cursor:zoom-in;border-radius:3px;transition:transform var(--t-medio),box-shadow var(--t-medio)}
@@ -164,7 +166,7 @@ p,li,blockquote{text-wrap:pretty}
 .ampliable:focus-visible{outline:2px solid var(--ocre-texto);outline-offset:4px}
 .zoom{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(35,31,23,0);cursor:zoom-out;transition:background 320ms ease}
 .zoom.abierto{background:rgba(35,31,23,.72)}
-.zoom img{width:min(100%,1000px);height:auto;border-radius:4px;box-shadow:0 24px 60px -12px rgba(0,0,0,.5);opacity:0;transform:scale(.82);transition:opacity 320ms ease,transform 420ms cubic-bezier(.2,.7,.2,1)}
+.zoom img{width:auto;max-width:min(100%,1000px);max-height:92vh;height:auto;background:#fff;border-radius:4px;box-shadow:0 24px 60px -12px rgba(0,0,0,.5);opacity:0;transform:scale(.82);transition:opacity 320ms ease,transform 420ms cubic-bezier(.2,.7,.2,1)}
 .zoom.abierto img{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.zoom,.zoom img,.ampliable{transition:none}}
 .doble figcaption{margin-top:.8rem;font-size:.9063rem;color:var(--gris);text-align:center}
@@ -350,6 +352,9 @@ form[data-tipo-actual=tienda] .solo-lector-txt{display:none}
   #muestra .cabeza-seccion p{display:none}
   .muestra{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:8px}
   .muestra figcaption span{display:none}
+  .salto-m{display:inline}
+  .muestra figure:nth-child(1){order:1}.muestra figure:nth-child(2){order:5}.muestra figure:nth-child(3){order:3}
+  .muestra figure:nth-child(4){order:4}.muestra figure:nth-child(5){order:2}.muestra figure:nth-child(6){order:6}
   .muestra figcaption{margin-top:.4rem}
   .muestra figcaption b{font-size:.95rem}
   .dobles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:22px calc(var(--gutter) * -1) 0;padding:0 var(--gutter) 6px;-webkit-overflow-scrolling:touch}

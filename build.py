@@ -74,8 +74,8 @@ T = {
         doble_pie="Doble página de Vila do Conde",
         doble2_alt="Doble página de Oia con la ilustración del monasterio y el texto en español e inglés",
         doble2_pie="Doble página de Oia",
-        doble3_alt="Doble página de Baiona con la ilustración de la carabela y el texto en español e inglés",
-        doble3_pie="Doble página de Baiona",
+        doble3_alt="Doble página de Arcade con la ilustración de las bateas de ostras y el texto en español e inglés",
+        doble3_pie="Doble página de Arcade",
         contenido_ante="Contenido",
         contenido_h="Cuatro actos, de Oporto a Santiago",
         contenido_txt="El libro sigue el camino en el orden en que se recorre. Además, cuatro fichas temáticas y un epílogo.",
@@ -171,8 +171,8 @@ T = {
         doble_pie="Double page about Vila do Conde",
         doble2_alt="Double page about Oia with the monastery illustration and the text in Spanish and English",
         doble2_pie="Double page about Oia",
-        doble3_alt="Double page about Baiona with the caravel illustration and the text in Spanish and English",
-        doble3_pie="Double page about Baiona",
+        doble3_alt="Double page about Arcade with the oyster rafts illustration and the text in Spanish and English",
+        doble3_pie="Double page about Arcade",
         contenido_ante="Contents",
         contenido_h="Four acts, from Porto to Santiago",
         contenido_txt="The book follows the Way in the order you walk it. It also has four theme pages and an epilogue.",
@@ -266,9 +266,13 @@ def pagina(t):
 
     muestra = ""
     for mid, nes, nen, pes, pen in MUESTRA:
-        muestra += (f'<figure class="aparece"><div class="muestra-img"><img class="acuarela" src="{pref}img/muestra/{mid}.webp" '
-                    f'alt="{e(pes if es else pen)}" loading="lazy" decoding="async"></div>'
-                    f'<figcaption><b>{e(nes if es else nen)}</b><span>{e(pes if es else pen)}</span></figcaption></figure>')
+        nom = e(nes if es else nen)
+        if mid == "flechas-azules":
+            nom = nom.replace(" azules", ' <br class="salto-m">azules') if es else nom.replace("The ", 'The <br class="salto-m">')
+        muestra += (f'<figure class="aparece"><button type="button" class="muestra-img ampliable" aria-label="{e(pes if es else pen)}">'
+                    f'<img class="acuarela" src="{pref}img/muestra/{mid}.webp" data-grande="{pref}img/muestra/{mid}-grande.webp" '
+                    f'alt="{e(pes if es else pen)}" loading="lazy" decoding="async"></button>'
+                    f'<figcaption><b>{nom}</b><span>{e(pes if es else pen)}</span></figcaption></figure>')
 
     actos = ""
     for i, (tes, ten, lugares) in enumerate(ACTOS):
@@ -383,7 +387,7 @@ def pagina(t):
       <figcaption>{e(t["doble2_pie"])}</figcaption>
     </figure>
     <figure class="doble doble-movil aparece">
-      <button type="button" class="ampliable" aria-label="{e(t["doble3_alt"])}"><img src="{pref}img/muestra/doble-baiona.webp" data-grande="{pref}img/muestra/doble-baiona-grande.webp" alt="{e(t["doble3_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
+      <button type="button" class="ampliable" aria-label="{e(t["doble3_alt"])}"><img src="{pref}img/muestra/doble-arcade.webp" data-grande="{pref}img/muestra/doble-arcade-grande.webp" alt="{e(t["doble3_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
       <figcaption>{e(t["doble3_pie"])}</figcaption>
     </figure>
     </div>
