@@ -156,6 +156,8 @@ p,li,blockquote{text-wrap:pretty}
 .dobles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,48px);margin-top:clamp(48px,7vw,80px)}
 @media (max-width:700px){.dobles{grid-template-columns:1fr}}
 .doble{margin:0}
+.doble-movil{display:none}
+.icono-ext{vertical-align:-1px;margin-left:.2em}
 .doble img{width:100%;box-shadow:var(--sombra);border-radius:3px}
 .ampliable{all:unset;display:block;cursor:zoom-in;border-radius:3px;transition:transform var(--t-medio),box-shadow var(--t-medio)}
 .ampliable:hover{transform:scale(1.02)}
@@ -351,7 +353,8 @@ form[data-tipo-actual=tienda] .solo-lector-txt{display:none}
   .muestra figcaption{margin-top:.4rem}
   .muestra figcaption b{font-size:.95rem}
   .dobles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:22px calc(var(--gutter) * -1) 0;padding:0 var(--gutter) 6px;-webkit-overflow-scrolling:touch}
-  .dobles .doble{flex:0 0 86%;scroll-snap-align:center}
+  .dobles .doble{flex:0 0 80%;scroll-snap-align:center}
+  .dobles .doble-movil{display:block}
   .doble figcaption{margin-top:.4rem}
   /* Contenido */
   .camino{gap:14px}

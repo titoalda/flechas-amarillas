@@ -74,6 +74,8 @@ T = {
         doble_pie="Doble página de Vila do Conde",
         doble2_alt="Doble página de Oia con la ilustración del monasterio y el texto en español e inglés",
         doble2_pie="Doble página de Oia",
+        doble3_alt="Doble página de Baiona con la ilustración de la carabela y el texto en español e inglés",
+        doble3_pie="Doble página de Baiona",
         contenido_ante="Contenido",
         contenido_h="Cuatro actos, de Oporto a Santiago",
         contenido_txt="El libro sigue el camino en el orden en que se recorre. Además, cuatro fichas temáticas y un epílogo.",
@@ -169,6 +171,8 @@ T = {
         doble_pie="Double page about Vila do Conde",
         doble2_alt="Double page about Oia with the monastery illustration and the text in Spanish and English",
         doble2_pie="Double page about Oia",
+        doble3_alt="Double page about Baiona with the caravel illustration and the text in Spanish and English",
+        doble3_pie="Double page about Baiona",
         contenido_ante="Contents",
         contenido_h="Four acts, from Porto to Santiago",
         contenido_txt="The book follows the Way in the order you walk it. It also has four theme pages and an epilogue.",
@@ -378,6 +382,10 @@ def pagina(t):
       <button type="button" class="ampliable" aria-label="{e(t["doble2_alt"])}"><img src="{pref}img/muestra/doble-oia.webp" data-grande="{pref}img/muestra/doble-oia-grande.webp" alt="{e(t["doble2_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
       <figcaption>{e(t["doble2_pie"])}</figcaption>
     </figure>
+    <figure class="doble doble-movil aparece">
+      <button type="button" class="ampliable" aria-label="{e(t["doble3_alt"])}"><img src="{pref}img/muestra/doble-baiona.webp" data-grande="{pref}img/muestra/doble-baiona-grande.webp" alt="{e(t["doble3_alt"])}" loading="lazy" decoding="async" width="1200" height="846"></button>
+      <figcaption>{e(t["doble3_pie"])}</figcaption>
+    </figure>
     </div>
   </div>
 </section>
@@ -426,7 +434,7 @@ def pagina(t):
       <p class="antetitulo">{e(t["autora_ante"])}</p>
       <p class="autora-nombre">{e(t["autora_nombre"])}</p>
       <p>{e(t["autora_txt"])}</p>
-      <a class="boton boton-secundario" href="https://aldaraalvarez.es{'' if es else '/en/'}" rel="noopener">{e(t["autora_web"])} <span aria-hidden="true">↗</span></a>
+      <a class="boton boton-secundario" href="https://aldaraalvarez.es{'' if es else '/en/'}" rel="noopener">{e(t["autora_web"])} <svg class="icono-ext" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 3h8v8M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </section>
